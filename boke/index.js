@@ -212,6 +212,33 @@ $().ready(function(){
 			$('#reg .succ_user').css('display','block');
 		}
 	});
+	/**密码验证*/
+	$('form').form('pass').bind('focus',function () {
+		$('#reg .info_pass').css('display','block');
+		$('#reg .error_pass').css('display','none');
+		$('#reg .succ_pass').css('display','none');
+	}).bind('blur',function () {
+		if(trim($(this).value())==''){
+			$('#reg .info_pass').css('display','none');
+		}
+	});
+	/**密码强度验证*/
+	$('form').form('pass').bind('keyup',function () {
+		var value = trim($(this).value());
+		var value_length = value.length;
+		//第一个条件,6-20位
+		if(value_length>=6 && value_length<=20){
+			$('#reg .info_pass .q1').html('●').css('color','green');
+		}else{
+			$('#reg .info_pass .q1').html('○').css('color','#666');
+		}
+		//第二个条件,字母或数字或非空字符,任意一个即可
+		if(value.length>0 && !/\s/.test(value)){
+			$('#reg .info_pass .q2').html('●').css('color','green');
+		}else{
+			$('#reg .info_pass .q2').html('○').css('color','#666');
+		}
+	});
 });
 
 
