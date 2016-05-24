@@ -147,7 +147,15 @@ $().ready(function(){
 
 	/**百度分享初始化位置*/
 	$('#share').css('top',getScroll().top+(getInner().height-parseInt(getStyle($('#share').first(),'height')))/2+'px');
+	/*
 	addEvent(window,'scroll',function () {
+		$('#share').animate({
+			attr:'y',
+			target:getScroll().top+(getInner().height-parseInt(getStyle($('#share').first(),'height')))/2
+		});
+	});
+	*/
+	$(window).bind('scroll',function () {
 		$('#share').animate({
 			attr:'y',
 			target:getScroll().top+(getInner().height-parseInt(getStyle($('#share').first(),'height')))/2
@@ -183,6 +191,26 @@ $().ready(function(){
 				'o':100
 			}
 		});
+	});
+	/**表单验证*/
+	$('form').form('user').bind('focus',function () {
+		$('#reg .info_user').css('display','block');
+		$('#reg .error_user').css('display','none');
+		$('#reg .succ_user').css('display','none');
+	}).bind('blur',function () {
+		if(trim($(this).value())==''){
+			$('#reg .info_user').css('display','none');
+			$('#reg .error_user').css('display','none');
+			$('#reg .succ_user').css('display','none');
+		}else if(!/[a-zA-Z0-9_]{2,20}/.test(trim($(this).value()))){
+			$('#reg .info_user').css('display','none');
+			$('#reg .error_user').css('display','block');
+			('#reg .succ_user').css('display','none');
+		}else {
+			$('#reg .info_user').css('display','none');
+			$('#reg .error_user').css('display','none');
+			$('#reg .succ_user').css('display','block');
+		}
 	});
 });
 

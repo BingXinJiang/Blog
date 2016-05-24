@@ -146,7 +146,8 @@ Base.prototype.getClass = function(className,parentNode){
 	}
 	var all = node.getElementsByTagName('*');
 	for(var i=0; i<all.length; i++){
-		if(all[i].className == className){
+		// if(all[i].className == className){
+		if((new RegExp('(\\s|^)'+className+'(\\s|$)')).test(all[i].className)){
 			temps.push(all[i]);
 		}
 	}
@@ -164,7 +165,7 @@ Base.prototype.first = function(){
 Base.prototype.last = function(){
 	return this.elements[this.elements.length-1];
 };
-//获取节点并返回Base对象
+/**获取节点并返回Base对象*/
 Base.prototype.eq = function(num){
 	var element = this.elements[num];
 	this.elements = [];
@@ -189,7 +190,7 @@ Base.prototype.prev = function () {
 	}
 	return this;
 };
-//获取tagName
+/**获取tagName*/
 Base.prototype.getTagName = function(tag,parentNode){
 	var node = null;
 	var temps = [];
@@ -204,7 +205,7 @@ Base.prototype.getTagName = function(tag,parentNode){
 	}
 	return temps;
 };
-//设置css样式
+/**设置css样式*/
 Base.prototype.css = function(attr,value){
 	for(var i=0; i<this.elements.length; i++){
 		if(arguments.length == 1){
@@ -214,18 +215,36 @@ Base.prototype.css = function(attr,value){
 	}
 	return this;
 };
-//添加link或style的css规则
+/**添加link或style的css规则*/
 Base.prototype.addRule = function(num,selector,cssText,index){
 	var sheet = document.styleSheets[num];
 	insertRule(sheet,selector,cssText,index);
 	return this;
 };
-//移除link或style的css规则
+/**移除link或style的css规则*/
 Base.prototype.removeRule = function(num,index){
 	var sheet = document.styleSheets[num];
 	deleteRule(sheet,index);
 	return this;
 };
+/**设置表单字段元素*/
+Base.prototype.form = function (name) {
+	for(var i=0; i<this.elements.length; i++){
+		this.elements[i] = this.elements[i][name];
+	}
+	return this;
+};
+/**设置表单字段内容获取*/
+Base.prototype.value = function(str){
+	for(var i=0; i<this.elements.length; i++){
+		if(arguments.length == 0){
+			return this.elements[i].value;
+		}
+		this.elements[i].value = str;
+	}
+	return this;
+};
+/**设置innerHTML*/
 Base.prototype.html = function(str){
 	for(var i=0; i<this.elements.length; i++){
 		if(arguments.length == 0){
@@ -235,14 +254,14 @@ Base.prototype.html = function(str){
 	}
 	return this;
 };
-//触发点击事件
+/**触发点击事件*/
 Base.prototype.click = function(fn){
 	for(var i=0; i<this.elements.length; i++){
 		this.elements[i].onclick = fn;
 	}
 	return this;
 };
-//添加class
+/**添加class*/
 Base.prototype.addClass = function(className){
 	for(var i=0; i<this.elements.length; i++){
 		if(!hasClass(this.elements[i],className)){
@@ -251,7 +270,7 @@ Base.prototype.addClass = function(className){
 	}
 	return this;
 };
-//移除class
+/**移除class*/
 Base.prototype.removeClass = function(className){
 	for(var i=0; i<this.elements.length; i++){
 		if(hasClass(this.elements[i],className)){
@@ -260,7 +279,14 @@ Base.prototype.removeClass = function(className){
 	}
 	return this;
 };
-//鼠标移入移出事件
+/**设置事件发生器*/
+Base.prototype.bind = function (event,fn) {
+	for(var i=0; i<this.elements.length; i++){
+		addEvent(this.elements[i],event,fn);
+	}
+	return this;
+};
+/**鼠标移入移出事件*/
 Base.prototype.hover = function(over,out){
 	for(var i=0; i<this.elements.length; i++){
 		// this.elements[i].onmouseover = over;
@@ -282,21 +308,21 @@ Base.prototype.toggle = function(){
 	}
 	return this;
 };
-//显示
+/**显示*/
 Base.prototype.show = function(){
 	for(var i=0; i<this.elements.length; i++){
 		this.elements[i].style.display = 'block';
 	}
 	return this;
 };
-//隐藏
+/**隐藏*/
 Base.prototype.hide = function(){
 	for(var i=0; i<this.elements.length; i++){
 		this.elements[i].style.display = 'none';
 	}
 	return this;
 };
-//设置居中
+/**设置居中*/
 Base.prototype.center = function(width,height){
 	var top = (getInner().height - height)/2;
 	var left = (getInner().width - width)/2;
@@ -306,7 +332,7 @@ Base.prototype.center = function(width,height){
 	}
 	return this;
 };
-//浏览器锁屏功能
+/**浏览器锁屏功能*/
 Base.prototype.lock = function(){
 	for(var i=0; i<this.elements.length; i++){
 		this.elements[i].style.width = getInner().width+'px';
@@ -323,7 +349,7 @@ Base.prototype.lock = function(){
 	}
 	return this;
 }
-//解除浏览器锁屏功能
+/**解除浏览器锁屏功能*/
 Base.prototype.unlock = function(){
 	for(var i=0; i<this.elements.length; i++){
 		this.elements[i].style.display = 'none';
@@ -332,7 +358,7 @@ Base.prototype.unlock = function(){
 	}
 	return this;
 }
-//浏览器窗口改变事件
+/**浏览器窗口改变事件*/
 Base.prototype.resize = function(fn){
 	for(var i=0; i<this.elements.length; i++){
 		var element = this.elements[i];
@@ -349,12 +375,12 @@ Base.prototype.resize = function(fn){
 	return this;
 };
 
-//浏览器滚动清零
+/**浏览器滚动清零*/
 function scrollTop(){
 	document.documentElement.scrollTop = 0;
 	document.body.scrollTop = 0;
 }
-//设置动画
+/**设置动画*/
 Base.prototype.animate = function(obj){
 
 	for(var i=0; i<this.elements.length; i++){

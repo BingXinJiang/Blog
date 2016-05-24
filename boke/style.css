@@ -153,6 +153,7 @@ ul li{
 	font-size: 14px;
 	color: #666;
 	padding: 0 0 0 10px;
+	position: relative;
 }
 #reg dl dd{
 	height: 30px;
@@ -185,6 +186,47 @@ ul li{
 	background: orange;
 	border: none;
 	cursor: pointer;
+}
+#reg dl dd span.info,#reg dl dd span.error,#reg dl dd span.succ{
+	display: block;
+	font-size: 12px;
+	color: #333;
+	width: 165px;
+	height: 32px;
+	line-height: 32px;
+	padding: 0 0 0 35px;
+	position: absolute;
+	display: none;
+}
+#reg dl dd span.info{
+	/*background: url("img/reg_info.png") no-repeat;*/
+}
+#reg dl dd span.error{
+	/*background: url("img/reg_error.png") no-repeat;*/
+}
+#reg dl dd span.succ{
+	height: 14px;
+	line-height: 14px;
+	/*background: url("img/reg_succ.png") no-repeat;*/
+	padding: 0 0 0 20px;
+	color: green;
+}
+#reg dl dd span.info_user{
+	top: 3px;
+	height: 43px;
+	left: 295px;
+	line-height: 18px;
+	padding-top: 7px;
+	/*background: url("img/reg_info2.png") no-repeat;*/
+	letter-spacing: 1px;
+}
+#reg dl dd span.error_user{
+	top: 3px;
+	left: 295px;
+}
+#reg dl dd span.succ_user{
+	top: 12px;
+	left: 295px;
 }
 #login div.user, #login div.pass{
 	font-size: 14px;
