@@ -252,6 +252,51 @@ ul li{
 	top: 52px;
 	left: 295px;
 }
+#reg dl dd span.info_notpass{
+	width: 244px;
+	padding: 4px 0 0 16px;
+	top: 83px;
+	left: 295px;
+	background: #FBF7E1;
+}
+#reg dl dd span.error_notpass{
+	top: 83px;
+	left: 295px;
+}
+#reg dl dd span.succ_notpass{
+	top: 92px;
+	left: 295px;
+}
+#reg dl dd span.info_ans{
+	width: 244px;
+	padding: 4px 0 0 16px;
+	top: 163px;
+	left: 295px;
+	background: #FBF7E1;
+}
+#reg dl dd span.error_ans{
+	top: 163px;
+	left: 295px;
+}
+#reg dl dd span.succ_ans{
+	top: 172px;
+	left: 295px;
+}
+#reg dl dd span.info_email{
+	width: 244px;
+	padding: 4px 0 0 16px;
+	top: 203px;
+	left: 295px;
+	background: #FBF7E1;
+}
+#reg dl dd span.error_email{
+	top: 203px;
+	left: 295px;
+}
+#reg dl dd span.succ_email{
+	top: 212px;
+	left: 295px;
+}
 #login div.user, #login div.pass{
 	font-size: 14px;
 	color: #666;
